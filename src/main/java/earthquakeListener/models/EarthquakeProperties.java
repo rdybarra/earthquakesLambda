@@ -1,9 +1,7 @@
-package com.example.earthquakes.models;
+package earthquakeListener.models;
 
 import com.google.api.client.util.Key;
-
 import java.math.BigInteger;
-import java.util.Date;
 
 public class EarthquakeProperties {
 
@@ -14,7 +12,7 @@ public class EarthquakeProperties {
     private String place;
 
     @Key
-    private BigInteger time;
+    public BigInteger time;
 
     public void setMag(float mag) {
         this.mag = mag;
@@ -23,6 +21,7 @@ public class EarthquakeProperties {
     public void setPlace(String place) {
         this.place = place;
     }
+
 
     public void setTime(BigInteger time) {
         this.time = time;

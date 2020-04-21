@@ -1,4 +1,4 @@
-package com.example.earthquakes.models;
+package earthquakeListener.models;
 
 import com.google.api.client.util.Key;
 

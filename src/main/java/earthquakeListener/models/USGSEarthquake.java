@@ -1,8 +1,6 @@
 package earthquakeListener.models;
 
 import com.google.api.client.util.Key;
-import com.example.earthquakes.models.EarthquakeGeometry;
-import com.example.earthquakes.models.EarthquakeProperties;
 
 public class USGSEarthquake {
     @Key
