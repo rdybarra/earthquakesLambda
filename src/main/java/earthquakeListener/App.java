@@ -1,20 +1,19 @@
 package earthquakeListener;
 
-import earthquakeListener.models.USGSEarthquake;
+import earthquakeListener.repositories.EmailRecipients;
 import earthquakeListener.repositories.USGSRepository;
-
-import java.util.ArrayList;
-import java.util.List;
+import earthquakeListener.utils.EarthquakeEmailContent;
+import earthquakeListener.utils.SendEmail;
 
 public class App {
     public static void main(String[] args) {
         USGSRepository earthquakeRepository = new USGSRepository();
-//        int numberOfEarthquakes = earthquakeRepository.getNumberOfEarthquakesInPastDay();
+        EmailRecipients emailRecipients = new EmailRecipients();
 
-        ArrayList<String> hotSpots =(ArrayList) earthquakeRepository.getHotspots();
-
-        for(int i = 0; i < hotSpots.size(); i++) {
-            System.out.println(hotSpots.get(i));
+        EarthquakeEmailContent earthquakeEmailContent = new EarthquakeEmailContent(earthquakeRepository);
+        SendEmail emailClient = new SendEmail();
+        for (String recipient: emailRecipients.getRecipients()) {
+            emailClient.sendEmail(recipient, earthquakeEmailContent.getSubject(), earthquakeEmailContent.getHTMLReport(), earthquakeEmailContent.getTextReport());
         }
     }
 }

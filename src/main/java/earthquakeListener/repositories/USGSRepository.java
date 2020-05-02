@@ -52,15 +52,24 @@ public class USGSRepository {
         return this.earthquakes.size();
     }
 
+    private String getCityFromPlace(String place) {
+        String[] placeComponents = place.split("of");
+        if (placeComponents.length > 1) {
+            return placeComponents[1].trim();
+        }
+
+        return place;
+    }
+
     public List<String> getHotspots() {
-        final int hotspotThreshold = 2;
+        final int hotspotThreshold = 4;
         ArrayList<String> hotspots = new ArrayList<String>();
         Map<String, Integer> locationCounts = new HashMap<String, Integer>();
 
         this.get1Point0EarthquakesPastDay();
 
         for(int i=0; i < this.earthquakes.size(); i++) {
-            String place = this.earthquakes.get(i).getProperties().getPlace();
+            String place = this.getCityFromPlace(this.earthquakes.get(i).getProperties().getPlace());
             int count = locationCounts.getOrDefault(place, new Integer(0));
             count += 1;
             locationCounts.put(place, new Integer(count));
@@ -68,7 +77,7 @@ public class USGSRepository {
 
         for (Map.Entry<String,Integer> locationCount : locationCounts.entrySet()) {
             if (locationCount.getValue() >= hotspotThreshold) {
-                hotspots.add(locationCount.getKey());
+                hotspots.add(locationCount.getKey() + "(" + locationCount.getValue() + ")");
             }
         }
 
