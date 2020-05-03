@@ -77,7 +77,7 @@ public class USGSRepository {
 
         for (Map.Entry<String,Integer> locationCount : locationCounts.entrySet()) {
             if (locationCount.getValue() >= hotspotThreshold) {
-                hotspots.add(locationCount.getKey() + "(" + locationCount.getValue() + ")");
+                hotspots.add(locationCount.getKey() + " (" + locationCount.getValue() + ")");
             }
         }
 

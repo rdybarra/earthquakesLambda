@@ -11,12 +11,10 @@ import earthquakeListener.repositories.USGSRepository;
 import earthquakeListener.utils.EarthquakeEmailContent;
 import earthquakeListener.utils.SendEmail;
 
-import java.util.Map;
-
-public class Handler implements RequestHandler<Map<String,String>, String>{
+public class Handler implements RequestHandler<Object, String>{
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
     @Override
-    public String handleRequest(Map<String,String> event, Context context)
+    public String handleRequest(Object event, Context context)
     {
         LambdaLogger logger = context.getLogger();
         String response = new String("200 OK");
